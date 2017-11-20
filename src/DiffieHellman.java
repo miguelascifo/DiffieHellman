@@ -3,7 +3,6 @@ import java.math.BigInteger;
 public class DiffieHellman {
 
     public static void main(String[] argv) {
-
         BigInteger clavePrivada = new BigInteger(String.valueOf(497));
         BigInteger p = new BigInteger(String.valueOf(852));
         BigInteger n = new BigInteger(String.valueOf(749720981));
@@ -30,14 +29,14 @@ public class DiffieHellman {
     }
 
     private static void ataque(BigInteger A, BigInteger B, BigInteger b, BigInteger m) {
-        int clave_alice = 0;
-        int clave_bob = 0;
+        int claveAlice = 0;
+        int claveBob = 0;
 
         for (int i = 0; i <= m.intValue() - 1; i++) {
             if (A.equals(exponencialModular(b, new BigInteger(String.valueOf(i)), m))) {
                 System.out.println("Clave secreta de Alice: " + i);
                 System.out.println("Z de Alice: " + exponencialModular(b, new BigInteger(String.valueOf(i)), m));
-                clave_alice = i;
+                claveAlice = i;
                 break;
             }
         }
@@ -46,12 +45,12 @@ public class DiffieHellman {
             if (B.equals(exponencialModular(b, new BigInteger(String.valueOf(i)), m))) {
                 System.out.println("Clave secreta de Bob: " + i);
                 System.out.println("Z de Bob: " + exponencialModular(b, new BigInteger(String.valueOf(i)), m));
-                clave_bob = i;
+                claveBob = i;
                 break;
             }
         }
 
-        System.out.println("\nClave común para Bob: " + exponencialModular(A, new BigInteger(String.valueOf(clave_bob)), m));
-        System.out.println("Clave común para Alice: " + exponencialModular(B, new BigInteger(String.valueOf(clave_alice)), m));
+        System.out.println("\nClave común para Bob: " + exponencialModular(A, new BigInteger(String.valueOf(claveBob)), m));
+        System.out.println("Clave común para Alice: " + exponencialModular(B, new BigInteger(String.valueOf(claveAlice)), m));
     }
 }
